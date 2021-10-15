@@ -1,21 +1,29 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
+
 // Write password to the #password input
 function writePassword() {
 //   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
 
-  var passwordLengthPrompt = window.prompt("How many characters would you like in your password: ");
-  var maxLengthPrompt = window.prompt("Maximum length of password (in characters)");
+  var passwordLengthPrompt = window.prompt("Choose password length between 8–128");
+
+
+  //make sure password length is between 8-128 characters
+  if (passwordLengthPrompt >= 8 && passwordLengthPrompt <= 128) {
+    console.log (passwordLengthPrompt);
+  }
+      else {
+          alert ("Please choose password length between 8–128");
+          writePassword();
+      }
+  
   var lowerCaseConfirm = "Would you like to include lower case characters?"
   var upperCaseConfirm = "Would you like to include upper case characters?"
   var numericConfirm = "Would you like to include numeric characters?"
   var specialCharactersConfirm = "Would you like to include special characters?"
-
-  console.log (passwordLengthPrompt);
-  console.log (maxLengthPrompt);
 
   confirm(lowerCaseConfirm);
   confirm(upperCaseConfirm);
@@ -24,27 +32,30 @@ function writePassword() {
 
   function getRandomLower (){
       var lowerCase = "abcdefghijklmnopqrstuvwxyz"
-      var randomLower = lowerCase [Math.floor(Math.random() * 26)];
+      var randomLower = lowerCase [Math.floor(Math.random() * lowerCase.length)];
       console.log (randomLower);
   }
 
   function getRandomUpper(){
       const upperCase = "ABCDEFGHJIJKLMNOPQRSTUVWXYZ";
-      var randomUpper = upperCase [Math.floor(Math.random() * 26)];
+      var randomUpper = upperCase [Math.floor(Math.random() * upperCase.length)];
       console.log (randomUpper);
   }
 
   function getRandomNumeric (){
       const numeric = "12345678790";
-      var randomNumeric = numeric [Math.floor(Math.random() * 26)];
+      var randomNumeric = numeric [Math.floor(Math.random() * numeric.length)];
       console.log (randomNumeric);
   }
 
   function getRandomSpecialChar (){
       const specialChar = "!#$%^&'()*+,-./:;<=>?@[\]^_`{|}~";
-      var randomSpecialChar = specialChar [Math.floor(Math.random() * 32)];
+      var randomSpecialChar = specialChar [Math.floor(Math.random() * specialChar.length)];
       console.log (randomSpecialChar);
   }
+
+  //if statements for the confirm prompts//
+
   getRandomLower();
   getRandomUpper();
   getRandomNumeric();
@@ -53,6 +64,8 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+    // const length = +passwordLengthPrompt.value;
+    // console.log (length)
 
 
 
