@@ -1,79 +1,79 @@
-// Assignment Code
+
+//click the button and prompt appears asking for password criteria
+//user selects password criteria
+    //user input length of characters: between 8 - 128
+//confirm: include lowercase, uppercase, num, or spec char
+// use if statements join strings together
+//randomly select characters from string
+//return a final password that includes at least one character from the 4 criteria
+//Display password on page
+
 var generateBtn = document.querySelector("#generate");
+var passwordCharacters = "";
+var finalPassword = "";
 
+function generatePassword() {
 
-// Write password to the #password input
-function writePassword() {
-//   var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
+var characterAmountPrompt = window.prompt("Choose password length between 8–128");
+var characterAmount = parseInt(characterAmountPrompt, 10);
 
-  var passwordLengthPrompt = window.prompt("Choose password length between 8–128");
-
-
-  //make sure password length is between 8-128 characters
-  if (passwordLengthPrompt >= 8 && passwordLengthPrompt <= 128) {
-    console.log (passwordLengthPrompt);
+  if (characterAmount >= 8 && characterAmount <= 128) {
+    console.log (characterAmount);
   }
       else {
           alert ("Please choose password length between 8–128");
-          writePassword();
+          generatePassword();
       }
-  
-  var lowerCaseConfirm = "Would you like to include lower case characters?"
-  var upperCaseConfirm = "Would you like to include upper case characters?"
-  var numericConfirm = "Would you like to include numeric characters?"
-  var specialCharactersConfirm = "Would you like to include special characters?"
 
-  confirm(lowerCaseConfirm);
-  confirm(upperCaseConfirm);
-  confirm(numericConfirm);
-  confirm(specialCharactersConfirm);
+var includeLowerPrompt = window.confirm ("Click OK to include lower case characters");
+var includeLower = includeLowerPrompt
+console.log (includeLower);
 
-  function getRandomLower (){
-      var lowerCase = "abcdefghijklmnopqrstuvwxyz"
-      var randomLower = lowerCase [Math.floor(Math.random() * lowerCase.length)];
-      console.log (randomLower);
-  }
+var includeUpperPrompt = window.confirm ("Click OK to include upper case characters");
+var includeUpper = includeUpperPrompt
+console.log (includeUpper);
 
-  function getRandomUpper(){
-      const upperCase = "ABCDEFGHJIJKLMNOPQRSTUVWXYZ";
-      var randomUpper = upperCase [Math.floor(Math.random() * upperCase.length)];
-      console.log (randomUpper);
-  }
+var includeNumberPrompt = window.confirm ("Click OK to include numbers");
+var includeNumber = includeNumberPrompt
+console.log (includeNumber);
 
-  function getRandomNumeric (){
-      const numeric = "12345678790";
-      var randomNumeric = numeric [Math.floor(Math.random() * numeric.length)];
-      console.log (randomNumeric);
-  }
+var includeSpecialCharPrompt = window.confirm ("Click OK to include special characters");
+var includeSpecialChar = includeSpecialCharPrompt
+console.log (includeSpecialChar);
 
-  function getRandomSpecialChar (){
-      const specialChar = "!#$%^&'()*+,-./:;<=>?@[\]^_`{|}~";
-      var randomSpecialChar = specialChar [Math.floor(Math.random() * specialChar.length)];
-      console.log (randomSpecialChar);
-  }
 
-  //if statements for the confirm prompts//
+var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+var upperCase = "ABCDEFGHJIJKLMNOPQRSTUVWXYZ";
+var numeric = "12345678790";
+var specialChar = "!#$%^&'()*+,-./:;<=>?@[\]^_`{|}~";
 
-  getRandomLower();
-  getRandomUpper();
-  getRandomNumeric();
-  getRandomSpecialChar();
+if (includeLower) {
+    var passwordCharacters = lowerCase
+}
+if (includeUpper) {
+     passwordCharacters = passwordCharacters + upperCase;
+}
+if (includeNumberPrompt) {
+     passwordCharacters = passwordCharacters + numeric;
+}
+if (includeSpecialChar) {
+     passwordCharacters = passwordCharacters + specialChar;
+    }
+
+var finalPassword = passwordCharacters [Math.floor(Math.random() * characterAmount)]
+
+for (var i = 0; i < characterAmount; i++){
+    return(finalPassword[i]);
+
+}
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-    // const length = +passwordLengthPrompt.value;
-    // console.log (length)
+// Write password to the #password input
+function writePassword() {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;  
+  }
 
-
-
-//CLICK the button and prompt appears asking for password criteria
-//user selects password criteria
-    //USER INPUT length of characters: at least 8 characters
-    //USER INPUT max characters: max 128 characters
-//CONFIRM: include lcase, upcase, num, or spec char
-
-//output: at least one of the characters appear in the password
-//ALERT: display password 
+  // Add event listener to generate button
+  generateBtn.addEventListener("click", writePassword);
