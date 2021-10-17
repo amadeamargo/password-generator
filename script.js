@@ -10,7 +10,6 @@
 
 var generateBtn = document.querySelector("#generate");
 var passwordCharacters = [];
-var finalPassword = "";
 
 function generatePassword() {
 
