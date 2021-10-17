@@ -3,26 +3,26 @@
 //user selects password criteria
     //user input length of characters: between 8 - 128
 //confirm: include lowercase, uppercase, num, or spec char
-// use if statements join strings together
-//randomly select characters from string
+// use if statements to join arrays together
+//randomly select characters from array
 //return a final password that includes at least one character from the 4 criteria
-//Display password on page
+//Display password in password box
 
 var generateBtn = document.querySelector("#generate");
-var passwordCharacters = "";
+var passwordCharacters = [];
 var finalPassword = "";
 
 function generatePassword() {
 
-var characterAmountPrompt = window.prompt("Choose password length between 8–128");
-var characterAmount = parseInt(characterAmountPrompt, 10);
+var characterAmount = window.prompt("Choose password length between 8–128");
+var passwordLength = +characterAmount;
 
-  if (characterAmount >= 8 && characterAmount <= 128) {
-    console.log (characterAmount);
+  if (passwordLength >=8 && passwordLength  <=128) {
+      console.log (passwordLength)
   }
       else {
-          alert ("Please choose password length between 8–128");
-          generatePassword();
+        alert ("Please choose password length between 8–128");
+        generatePassword();
       }
 
 var includeLowerPrompt = window.confirm ("Click OK to include lower case characters");
@@ -41,36 +41,51 @@ var includeSpecialCharPrompt = window.confirm ("Click OK to include special char
 var includeSpecialChar = includeSpecialCharPrompt
 console.log (includeSpecialChar);
 
-
-var lowerCase = "abcdefghijklmnopqrstuvwxyz";
-var upperCase = "ABCDEFGHJIJKLMNOPQRSTUVWXYZ";
-var numeric = "12345678790";
-var specialChar = "!#$%^&'()*+,-./:;<=>?@[\]^_`{|}~";
-
-if (includeLower) {
-    var passwordCharacters = lowerCase
-}
-if (includeUpper) {
-     passwordCharacters = passwordCharacters + upperCase;
-}
-if (includeNumberPrompt) {
-     passwordCharacters = passwordCharacters + numeric;
-}
-if (includeSpecialChar) {
-     passwordCharacters = passwordCharacters + specialChar;
+var lowerCaseCharCodes = arrayFromLowtoHigh (97, 122)
+var upperCaseCharCodes = arrayFromLowtoHigh (65, 90)
+var numberCharCodes = arrayFromLowtoHigh (48, 57)
+var speCharCodes = arrayFromLowtoHigh (33, 47)
+    .concat( arrayFromLowtoHigh (58, 64)
+     ).concat(arrayFromLowtoHigh (91, 96)
+     ).concat(arrayFromLowtoHigh (123,126)
+     )
+ 
+var charCodes = [];
+    if (includeLower === true) {
+        charCodes = charCodes.concat(lowerCaseCharCodes)
+    }
+   
+    if (includeUpper === true) {
+        charCodes = charCodes.concat(upperCaseCharCodes)
     }
 
-var finalPassword = passwordCharacters [Math.floor(Math.random() * characterAmount)]
+    if (includeNumber === true) {
+        charCodes = charCodes.concat(numberCharCodes)
+    }
+    if (includeSpecialChar === true) {
+        charCodes = charCodes.concat(speCharCodes)
+    }
 
-for (var i = 0; i < characterAmount; i++){
-    return(finalPassword[i]);
+var finalPassword = []
+    for (let i = 0; i < passwordLength; i++) {
+        var characterCode = charCodes[Math.floor(Math.random() * passwordLength)]
+        finalPassword.push(String.fromCharCode(characterCode))
+    }
+    return (finalPassword)
 
+
+function arrayFromLowtoHigh (low, high){
+    var array = []
+    for (var i = low; i <= high; i++){
+        array.push(i)
+    }
+    return array
 }
 }
 
 // Write password to the #password input
 function writePassword() {
-    var password = generatePassword();
+    var password = generatePassword()
     var passwordText = document.querySelector("#password");
     passwordText.value = password;  
   }
